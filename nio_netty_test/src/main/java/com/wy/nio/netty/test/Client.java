@@ -1,8 +1,5 @@
-package com.wy.nio_netty_test.netty;
+package com.wy.nio.netty.test;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;

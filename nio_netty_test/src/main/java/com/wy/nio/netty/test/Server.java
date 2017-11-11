@@ -1,4 +1,4 @@
-package com.wy.nio_netty_test.netty;
+package com.wy.nio.netty.test;
 
 import java.net.InetAddress;
 
@@ -10,6 +10,7 @@ import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelPipeline;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.channel.epoll.EpollEventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
@@ -19,10 +20,12 @@ import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 
 public class Server {
-
+	static final int PORT = 8888;
+//	static final Map<>
 	public void run() {
 		EventLoopGroup boosGroup = new NioEventLoopGroup();
 		EventLoopGroup workerGroup = new NioEventLoopGroup();
+//		EpollEventLoopGroup
 		ServerBootstrap b = new ServerBootstrap();
 		b.group(boosGroup, workerGroup);
 		b.channel(NioServerSocketChannel.class);
@@ -30,8 +33,9 @@ public class Server {
 
 			@Override
 			protected void initChannel(SocketChannel ch) throws Exception {
+				System.out.println("init channel");
 				ChannelPipeline pipeline = ch.pipeline();
-				pipeline.addLast("framer", new DelimiterBasedFrameDecoder(8192, Delimiters.lineDelimiter()));
+//				pipeline.addLast("framer", new DelimiterBasedFrameDecoder(8192, Delimiters.lineDelimiter()));
 				pipeline.addLast("decoder", new StringDecoder());
 				pipeline.addLast("encoder", new StringEncoder());
 				pipeline.addLast("handler", new HelloServerHandler());
@@ -39,7 +43,7 @@ public class Server {
 
 		});
 		try {
-			ChannelFuture cf = b.bind(9999).sync();
+			ChannelFuture cf = b.bind(PORT).sync();
 			cf.channel().closeFuture().sync();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
