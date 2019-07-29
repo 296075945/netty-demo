@@ -1,4 +1,4 @@
-package com.wy.nio_netty_test;
+package com.wy.netty.demo;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
