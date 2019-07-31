@@ -30,10 +30,15 @@ public class Client {
 		});
 		Channel channel = bootstrap.connect("localhost", 22222).sync().channel();
 
+		Thread.sleep(1000);
+		
 		channel.writeAndFlush(Unpooled.wrappedBuffer("123".getBytes()));
 		
 		channel.writeAndFlush("123");
 		
 		System.out.println("write");
+		
+		channel.close();
+		workerGroup.shutdownGracefully();
 	}
 }

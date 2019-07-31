@@ -36,6 +36,7 @@ public class Server {
 			pipeline.addLast(new StringDecoder());
 			pipeline.addLast(new ServerInboundHandler());
 		}
+		
 	}
 
 	private static class ServerInboundHandler extends ChannelInboundHandlerAdapter {
@@ -49,10 +50,11 @@ public class Server {
 
 		@Override
 		public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
-			// TODO Auto-generated method stub
 			super.channelRegistered(ctx);
+			System.out.println("channel registered");
 		}
 
+		
  		
 	}
 }
