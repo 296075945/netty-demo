@@ -1,7 +1,6 @@
 package com.wy.netty.demo.handler;
 
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.ChannelInitializer;
@@ -12,7 +11,6 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.string.StringDecoder;
-import io.netty.handler.codec.string.StringEncoder;
 
 public class Server {
 
@@ -36,7 +34,6 @@ public class Server {
 		protected void initChannel(SocketChannel ch) throws Exception {
 			ChannelPipeline pipeline = ch.pipeline();
 			pipeline.addLast(new StringDecoder());
-
 			pipeline.addLast(new ServerInboundHandler());
 		}
 	}
@@ -50,5 +47,12 @@ public class Server {
 			System.out.println(msg);
 		}
 
+		@Override
+		public void channelRegistered(ChannelHandlerContext ctx) throws Exception {
+			// TODO Auto-generated method stub
+			super.channelRegistered(ctx);
+		}
+
+ 		
 	}
 }
